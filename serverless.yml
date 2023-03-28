@@ -1,4 +1,4 @@
-service: prisma-serverless
+service: knex-serverless
 frameworkVersion: "3"
 useDotenv: true
 
@@ -9,13 +9,6 @@ provider:
 plugins:
   - serverless-plugin-typescript
   - serverless-offline
-
-package:
-  patterns:
-    - "!node_modules/.prisma/client/libquery_engine-*"
-    - "node_modules/.prisma/client/libquery_engine-rhel-*"
-    - "!node_modules/prisma/libquery_engine-*"
-    - "!node_modules/@prisma/engines/**"
 
 functions:
   createUser:
