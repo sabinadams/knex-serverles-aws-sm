@@ -1,0 +1,33 @@
+service: prisma-serverless
+frameworkVersion: "3"
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+package:
+  patterns:
+    - "!node_modules/.prisma/client/libquery_engine-*"
+    - "node_modules/.prisma/client/libquery_engine-rhel-*"
+    - "!node_modules/prisma/libquery_engine-*"
+    - "!node_modules/@prisma/engines/**"
+
+functions:
+  createUser:
+    handler: functions/createUser.handler
+    events:
+      - http:
+          method: POST
+          path: /user
+          cors: true
+  getUsers:
+    handler: functions/getUsers.handler
+    events:
+      - http:
+          method: GET
+          path: /users
